@@ -67,7 +67,7 @@ public class AirportServices {
                 duration= Math.min(duration , f.getDuration());
             }
         }
-
+        if(duration == Double.MAX_VALUE) return -1;
         return duration;
     }
 
