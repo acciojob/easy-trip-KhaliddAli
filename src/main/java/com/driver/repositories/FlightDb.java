@@ -33,7 +33,7 @@ public class FlightDb {
     }
 
     public int getPassengersInFlight(int id) {
-        return passengersInFlight.get(id).size();
+        return passengersInFlight.getOrDefault(id , new ArrayList<>()).size();
     }
     public ArrayList<Integer> getPassengersList(int id) {
         return passengersInFlight.getOrDefault(id , new ArrayList<>());

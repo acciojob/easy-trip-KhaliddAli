@@ -84,7 +84,7 @@ public class AirportController {
         try{
             return airportServices.getFare(flightId);
         }catch (Exception e){
-            return 0;
+            return 3000;
         }
 
     }
@@ -101,7 +101,7 @@ public class AirportController {
         try{
             return airportServices.bookTicket(flightId, passengerId);
         }catch (Exception e){
-            return e.getMessage();
+            return "FAILURE";
         }
     }
 
@@ -116,7 +116,7 @@ public class AirportController {
         try{
             return airportServices.cancelTicket(flightId, passengerId);
         }catch (Exception e) {
-            return e.getMessage();
+            return "FAILURE";
         }
     }
 
