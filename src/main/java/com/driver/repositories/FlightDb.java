@@ -27,7 +27,7 @@ public class FlightDb {
         if(list.isEmpty()) return "FAILURE";
         if(!list.contains(p_ID)) return "FAILURE";
 
-
+        list.remove(Integer.valueOf(p_ID));
         passengersInFlight.put(f_ID ,list);
         return "SUCCESS";
     }
