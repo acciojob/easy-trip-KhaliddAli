@@ -9,11 +9,11 @@ import java.util.HashMap;
 
 @Repository
 public class FlightDb {
-    ArrayList<Flight> flights = new ArrayList<>();
+    HashMap<Integer , Flight> flights = new HashMap<>();
 
     HashMap<Integer , ArrayList<Integer>> passengersInFlight = new HashMap<>();
 
-    public ArrayList<Flight> getFlights() {
+    public HashMap<Integer,Flight> getFlights() {
         return this.flights;
     }
 
@@ -40,9 +40,7 @@ public class FlightDb {
     }
 
     public Flight getFlight(int id) {
-        for(Flight f : flights) {
-            if(f.getFlightId() == id) return f;
-        }
+        if(flights.containsKey(id)) return flights.get(id);
         return new Flight();
     }
 
@@ -51,6 +49,6 @@ public class FlightDb {
     }
 
     public void addFlight(Flight flight) {
-        flights.add(flight);
+        flights.put(flight.getFlightId() , flight);
     }
 }

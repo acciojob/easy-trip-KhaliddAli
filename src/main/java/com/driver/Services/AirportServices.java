@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -58,9 +59,9 @@ public class AirportServices {
     }
 
     public double getShortestFlight(City fromcity , City toCity) {
-        ArrayList<Flight> listOfFlights = flightDb.getFlights();
+        HashMap<Integer,Flight> listOfFlights = flightDb.getFlights();
         double duration = Double.MAX_VALUE;
-        for(Flight f : listOfFlights) {
+        for(Flight f : listOfFlights.values()) {
             City c1 = f.getFromCity();
             City c2 = f.getToCity();
             if(c1 == fromcity && c2 == toCity){
@@ -75,12 +76,22 @@ public class AirportServices {
         Airport airport = airportDB.getAirportByName(airportName);
         City city = airport.getCity();
 
-        ArrayList<Flight> flights = flightDb.getFlights();
+        HashMap<Integer,Flight> flights= flightDb.getFlights();
         int count = 0;
-        for(Flight f : flights) {
+        for(Flight f : flights.values()) {
+            Date d_date = f.getFlightDate();
             Date f_date = f.getFlightDate();
+            double duration = f.getDuration();
+            if(duration>=24.00){
+                int days = (int)duration%24;
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(f_date);
+                calendar.add(Calendar.DAY_OF_MONTH,days);
+                f_date = calendar.getTime();
+
+            }
             City c1 = f.getFromCity();
-            if(f_date == date && c1 == city) {
+            if((f_date == date || d_date==date) && c1 == city) {
                 count += flightDb.getPassengersInFlight(f.getFlightId());
             }
         }
