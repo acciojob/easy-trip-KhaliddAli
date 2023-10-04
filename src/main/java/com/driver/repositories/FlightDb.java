@@ -25,9 +25,12 @@ public class FlightDb {
     public String removePassengerInFlight(Integer f_ID , Integer p_ID) {
         ArrayList<Integer> list =  passengersInFlight.getOrDefault(f_ID,new ArrayList<>());
         if(list.isEmpty()) return "FAILURE";
-        if(!list.contains(p_ID)) return "FAILURE";
-
-        list.remove(Integer.valueOf(p_ID));
+        int indx = -1;
+        for(int i=0;i<list.size();i++){
+            if(list.get(i)==p_ID) indx = i;
+        }
+        if(indx == -1) return "FAILURE";
+        list.remove(indx);
         passengersInFlight.put(f_ID ,list);
         return "SUCCESS";
     }
