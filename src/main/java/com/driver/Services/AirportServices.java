@@ -20,14 +20,13 @@ import java.util.HashMap;
 
 @Service
 public class AirportServices {
-    @Autowired
-    AirportDB airportDB;
-    @Autowired
-    CityDB cityDB;
-    @Autowired
-    FlightDb flightDb;
-    @Autowired
-    PassengersDB passengersDB;
+
+    AirportDB airportDB = new AirportDB();
+
+
+    FlightDb flightDb = new FlightDb();
+
+    PassengersDB passengersDB = new PassengersDB();
 
     public void addtoDB(Airport airport) {
 
