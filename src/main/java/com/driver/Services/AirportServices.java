@@ -74,20 +74,20 @@ public class AirportServices {
         HashMap<Integer,Flight> flights= flightDb.getFlights();
         int count = 0;
         for(Flight f : flights.values()) {
-            Date d_date = f.getFlightDate();
+//            Date d_date = f.getFlightDate();
             Date f_date = f.getFlightDate();
-            double duration = f.getDuration();
-            if(duration>=24.00){
-                int days = (int)duration%24;
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(f_date);
-                calendar.add(Calendar.DAY_OF_MONTH,days);
-                f_date = calendar.getTime();
-
-            }
+//            double duration = f.getDuration();
+//            if(duration>=24.00){
+//                int days = (int)duration%24;
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(f_date);
+//                calendar.add(Calendar.DAY_OF_MONTH,days);
+//                f_date = calendar.getTime();
+//
+//            }
             City c1 = f.getFromCity();
             City c2 = f.getToCity();
-            if((f_date == date || d_date==date) && (c1 == city || c2 == city)) {
+            if((f_date.equals(date)) && (c1.equals(city) || c2.equals(city))) {
                 count += flightDb.getPassengersInFlight(f.getFlightId());
             }
         }
