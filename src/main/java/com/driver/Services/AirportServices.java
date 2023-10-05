@@ -13,10 +13,7 @@ import org.springframework.stereotype.Indexed;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 
 @Service
 public class AirportServices {
@@ -39,12 +36,12 @@ public class AirportServices {
         int num =0;
         for(Airport port : list) {
             int portNumbers = port.getNoOfTerminals();
-            if(portNumbers == num) {
-                ans = compareNames(ans , port.getAirportName());
-            }
-            else if(portNumbers > num) {
+            if(portNumbers > num || ans.equals("")) {
                 num = portNumbers;
                 ans = port.getAirportName();
+            }
+            else if(portNumbers == num) {
+                ans = compareNames(ans , port.getAirportName());
             }
         }
 
@@ -53,7 +50,6 @@ public class AirportServices {
     public String compareNames(String s1 , String s2) {
         int val = s1.compareTo(s2);
         if(val<0) return s2;
-        else if(val == 0) return s1;
         else return s1;
     }
 
@@ -153,16 +149,16 @@ public class AirportServices {
         //number of passengers
         int n = flightDb.getPassengersInFlight(flightId);
         if(n==0) return 3000;
-        int revenue = n*3000;
+        int revenue = 0;
         revenue += sumation(n);
         return revenue;
     }
 
     private int sumation(int n) {
-        int sum =0;
+        int sum = 0;
 
-        for(int i=1;i<=n;i++){
-            sum += (i*50);
+        for(int i=0;i<n;i++){
+            sum += 3000 + (i*50);
         }
         return sum;
     }
