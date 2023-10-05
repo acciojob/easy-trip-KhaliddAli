@@ -86,7 +86,8 @@ public class AirportServices {
 
             }
             City c1 = f.getFromCity();
-            if((f_date == date || d_date==date) && c1 == city) {
+            City c2 = f.getToCity();
+            if((f_date == date || d_date==date) && (c1 == city || c2 == city)) {
                 count += flightDb.getPassengersInFlight(f.getFlightId());
             }
         }
