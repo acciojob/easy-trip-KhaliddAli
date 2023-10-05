@@ -49,7 +49,7 @@ public class AirportServices {
     }
     public String compareNames(String s1 , String s2) {
         int val = s1.compareTo(s2);
-        if(val<0) return s2;
+        if(val>0) return s2;
         else return s1;
     }
 
